@@ -1,0 +1,54 @@
+/* Reinicio básico para evitar centrado no deseado */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #f8f9fc;
+  color: #5a5c69;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Asegura que el contenedor principal ocupe todo el ancho */
+#root {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+/* Imagen de fondo del login */
+.bg-login-image {
+  background: url('/assets/login-bg.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Imagen de fondo del registro */
+.bg-register-image {
+  background: url('/assets/register-bg.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Botón principal */
+.btnLogin {
+  background-color: #4e73df;
+  border: none;
+  transition: 0.3s;
+}
+
+.btnLogin:hover {
+  background-color: #2e59d9;
+}
+
+/* Ajustes responsivos */
+.container {
+  margin-top: 50px;
+}
