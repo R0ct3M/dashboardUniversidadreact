@@ -26,7 +26,7 @@ function Sidebar() {
 
       <div className="sidebar-heading">Módulos Educativos</div>
 
-      {/* Ingreso y registro */}
+      {/* Ingreso y registro (Estudiantes) */}
       <li className="nav-item">
         <a
           className="nav-link collapsed"
@@ -42,7 +42,7 @@ function Sidebar() {
         <div id="collapseIngreso" className="collapse" data-bs-parent="#accordionSidebar">
           <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Acciones:</h6>
-            <Link className="collapse-item" to="/listado-estudiantes">Ver Estudiantes</Link>
+            <Link className="collapse-item" to="/estudiantes">Ver Estudiantes</Link>
             <Link className="collapse-item" to="/crear-estudiante">Crear Estudiante</Link>
           </div>
         </div>

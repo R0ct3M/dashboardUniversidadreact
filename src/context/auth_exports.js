@@ -1,9 +1,11 @@
-import { createContext, useContext } from 'react';
+import { useContext, createContext } from "react";
+import { AuthProvider as OriginalAuthProvider } from "./AuthContext";
 
 // Contexto
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 
-// hook personalizado
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+
+export const AuthProvider = OriginalAuthProvider;

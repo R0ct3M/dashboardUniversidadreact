@@ -1,34 +1,39 @@
-// src/context/AuthContext.jsx (Archivo MODIFICADO)
-import { useState } from 'react';
-// Importamos el Contexto y el Hook del nuevo archivo
+// src/context/AuthContext.jsx
+
+import React, { useState } from 'react';
+import { apiLogin } from '../services/authService';
+
 import { AuthContext } from './auth_exports';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    return localStorage.getItem('sesion_activa') || null;
+    const storedUser = localStorage.getItem('sesion_activa');
+    return storedUser ? JSON.parse(storedUser) : null;
   });
 
-  // Funciones login y logout (tal como las teníamos)
-  const login = (username, password) => {
-    const usuariosJSON = localStorage.getItem('usuarios_registrados');
-    const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
+  // FUNCIÓN LOGIN
+  const login = async (username, password) => {
+    const { success, user: userData, token } = await apiLogin(username, password);
 
-    const usuarioValido = usuarios.find(
-      u => u.username === username && u.password === password);
-
-    if (usuarioValido) {
+    if (success){
       const sesionData = {
-        username: usuarioValido.username,
-        nombre: usuarioValido.nombreCompleto 
+        username: userData.username,
+        nombre: userData.nombreCompleto,
+        role: userData.role, // Se almacena el rol
+        token: token
       };
 
+      // Almacenamiento en localStorage
       localStorage.setItem('sesion_activa', JSON.stringify(sesionData));
-      setUser(JSON.stringify(sesionData));
+      
+      // Almacenamiento en el estado
+      setUser(sesionData); 
       return true;
     }
     return false;
   };
 
+  // FUNCIÓN LOGOUT
   const logout = () => {
     localStorage.removeItem('sesion_activa');
     setUser(null);
@@ -36,9 +41,10 @@ export const AuthProvider = ({ children }) => {
   
   const value = {
     user,
+    role: user?.role,
     login,
     logout,
-    isLoggedIn: !!user 
+    isLoggedIn: !!user,
   };
 
   return (

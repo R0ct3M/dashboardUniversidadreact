@@ -15,7 +15,7 @@ export default function PrivateLayout({ children }) {
     };
 
     // Determinar el nombre a mostrar
-    const username = user ? JSON.parse(user).username : "Invitado";
+    const username = user?.nombre || user?.username || "Invitado";
 
     return (
         <div id="wrapper">
